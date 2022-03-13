@@ -16,6 +16,7 @@ async function loadUser() {
 
 async function loginFn(data) {
   const { authToken } = await access(data, "login");
+  storage.setToken(authToken);
 
   const { user_id } = decodeJWT(authToken);
 

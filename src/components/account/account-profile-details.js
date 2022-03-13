@@ -1,6 +1,8 @@
 import { useFormik } from "formik";
 import { useAuth } from "../../lib/auth";
-import { states } from "../../__mocks__/states";
+import { useQuery, useMutation } from "react-query";
+
+import { updateUserProfile } from "../../query-functions";
 
 import * as Yup from "yup";
 
@@ -16,7 +18,19 @@ import {
 import { LoadingButton } from "@mui/lab";
 
 const AccountProfileDetails = () => {
-  const { user } = useAuth();
+  const { user, refetchUser } = useAuth();
+
+  const { mutate, isLoading } = useMutation(
+    (formValues) => updateUserProfile(user._id, formValues),
+    {
+      onSuccess: () => {
+        refetchUser();
+      },
+      onError: (err) => {
+        console.log(err.response);
+      },
+    }
+  );
 
   const formik = useFormik({
     initialValues: {
@@ -35,7 +49,7 @@ const AccountProfileDetails = () => {
         .required("don't be shy 😆"),
     }),
     onSubmit: (formValues, { setErrors }) => {
-      console.log(formValues);
+      mutate(formValues);
     },
   });
 
@@ -45,6 +59,7 @@ const AccountProfileDetails = () => {
       autoComplete="false"
       autoCorrect="false"
     >
+      {console.log(isLoading, "here")}
       <Card>
         <CardHeader
           subheader="use your business details, it will allow you to automate your invoices"

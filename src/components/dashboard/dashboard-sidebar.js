@@ -1,15 +1,17 @@
-import { useEffect } from "react";
-import NextLink from "next/link";
-import { useRouter } from "next/router";
 import PropTypes from "prop-types";
+import NextLink from "next/link";
+
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+
 import { Box, Divider, Drawer, useMediaQuery } from "@mui/material";
-import { ChartBar as ChartBarIcon } from "../../icons/chart-bar";
-import { User as UserIcon } from "../../icons/user";
-import { UserAdd as UserAddIcon } from "../../icons/user-add";
-import { Users as UsersIcon } from "../../icons/users";
-import { XCircle as XCircleIcon } from "../../icons/x-circle";
+
 import { Logo } from "../logo";
+
+import { User as UserIcon } from "../../icons/user";
 import { NavItem } from "../nav-item";
+import { Users as UsersIcon } from "../../icons/users";
+import { ChartBar as ChartBarIcon } from "../../icons/chart-bar";
 
 const items = [
   {
@@ -26,11 +28,6 @@ const items = [
     href: "/account",
     icon: <UserIcon fontSize="small" />,
     title: "Account",
-  },
-  {
-    href: "/404",
-    icon: <XCircleIcon fontSize="small" />,
-    title: "Error",
   },
 ];
 

@@ -22,7 +22,6 @@ const AccountProfile = () => {
   return (
     <Card>
       <CardContent>
-        {console.log(selectedFile)}
         <Box
           sx={{
             alignItems: "center",

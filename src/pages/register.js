@@ -26,7 +26,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const Register = () => {
-  const { register } = useAuth();
+  const { register, isRegistering } = useAuth();
   const router = useRouter();
 
   const [tosOpen, setTosOpen] = useState(false);
@@ -197,7 +197,7 @@ const Register = () => {
             <Box sx={{ py: 2 }}>
               <LoadingButton
                 color="primary"
-                loading={false}
+                loading={isRegistering}
                 disabled={!formik.isValid}
                 fullWidth
                 size="large"

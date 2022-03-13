@@ -6,7 +6,7 @@ export const decodeJWT = (jwt) => {
 
 export const storage = {
   getToken: () => localStorage.getItem("token"),
-  setToken: (token) => localStorage.setItem("token", token),
+  setToken: (token) => localStorage.setItem("token", `bearer ${token}`),
   clearToken: () => localStorage.removeItem("token"),
 };
 
