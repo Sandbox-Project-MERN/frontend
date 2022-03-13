@@ -1,5 +1,5 @@
 import { useAuth } from "../../lib/auth";
-
+import { useState } from "react";
 import {
   Avatar,
   Box,
@@ -8,6 +8,7 @@ import {
   CardActions,
   CardContent,
   Divider,
+  Input,
   Typography,
 } from "@mui/material";
 
@@ -15,9 +16,13 @@ import { getInitials, capitalizeName } from "../../utils";
 
 const AccountProfile = () => {
   const { user } = useAuth();
+
+  const [selectedFile, setSelectedFile] = useState();
+
   return (
     <Card>
       <CardContent>
+        {console.log(selectedFile)}
         <Box
           sx={{
             alignItems: "center",
@@ -41,17 +46,28 @@ const AccountProfile = () => {
           <Typography color="textSecondary" variant="body2">
             {user.description}
           </Typography>
-          {/* <Typography color="textSecondary" variant="body2">
-          {new Date().getFullYear}
-        </Typography> */}
         </Box>
       </CardContent>
       <Divider />
-      {/* <CardActions>
-      <Button color="primary" fullWidth variant="text">
-        Upload picture
-      </Button>
-    </CardActions> */}
+      <CardActions>
+        <Button
+          color="primary"
+          fullWidth
+          variant="text"
+          component="label"
+          aria-label="upload picture"
+        >
+          Upload picture
+          <Input
+            name="file"
+            onChange={(e) => setSelectedFile(e.target.files[0])}
+            type="file"
+            id="contained-button-file"
+            sx={{ display: "none" }}
+            inputProps={{ hidden: true, accept: "image/png, image/jpeg" }}
+          />
+        </Button>
+      </CardActions>
     </Card>
   );
 };

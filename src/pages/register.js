@@ -21,7 +21,7 @@ import {
 } from "@mui/material";
 
 import LoadingButton from "@mui/lab/LoadingButton";
-
+import TermsOfService from "../components/terms-of-service";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
@@ -29,6 +29,7 @@ const Register = () => {
   const { register } = useAuth();
   const router = useRouter();
 
+  const [tosOpen, setTosOpen] = useState(false);
   const [pwVisible, setPwVisibility] = useState(false);
 
   const formik = useFormik({
@@ -179,12 +180,16 @@ const Register = () => {
               />
               <Typography color="textSecondary" variant="body2">
                 I have read the{" "}
-                <NextLink href="#" passHref>
-                  <Link color="primary" underline="always" variant="subtitle2">
-                    Terms and Conditions
-                  </Link>
-                </NextLink>
+                <Link
+                  color="primary"
+                  underline="always"
+                  variant="subtitle2"
+                  onClick={() => setTosOpen(true)}
+                >
+                  Terms and Conditions
+                </Link>
               </Typography>
+              <TermsOfService open={tosOpen} setOpen={setTosOpen} />
             </Box>
             {Boolean(formik.touched.policy && formik.errors.policy) && (
               <FormHelperText error>{formik.errors.policy}</FormHelperText>
