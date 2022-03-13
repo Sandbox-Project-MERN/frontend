@@ -134,7 +134,7 @@ const AccountProfileDetails = () => {
             variant="contained"
             type="submit"
             disabled={!formik.isValid}
-            loading={false}
+            loading={isLoading}
           >
             Save Details
           </LoadingButton>

@@ -42,7 +42,11 @@ const AccountProfile = () => {
           <Typography color="textPrimary" gutterBottom variant="h5">
             {capitalizeName(user.full_name)}
           </Typography>
-          <Typography color="textSecondary" variant="body2">
+          <Typography
+            color="textSecondary"
+            variant="body2"
+            textAlign={"center"}
+          >
             {user.description}
           </Typography>
         </Box>

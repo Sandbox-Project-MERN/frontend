@@ -2,12 +2,6 @@ import { initReactQueryAuth } from "react-query-auth";
 import { access, getUserProfile } from "../query-functions";
 import { storage, decodeJWT } from "../utils";
 
-export async function handleUserResponse(data) {
-  const { jwt, user } = data;
-  storage.setToken(jwt);
-  return user;
-}
-
 async function loadUser() {
   const { user_id } = decodeJWT(storage.getToken());
 
