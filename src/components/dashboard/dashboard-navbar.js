@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import NextLink from "next/link";
 
 import { useAuth } from "../../lib/auth";
 import { getInitials } from "../../utils";
@@ -15,7 +16,9 @@ import {
 
 import MenuIcon from "@mui/icons-material/Menu";
 import styled from "@emotion/styled";
+
 import { Users as UsersIcon } from "../../icons/users";
+import { User as UserIcon } from "../../icons/user";
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -57,21 +60,29 @@ const DashboardNavbar = ({ onSidebarOpen }) => {
             <MenuIcon fontSize="small" />
           </IconButton>
           <Box sx={{ flexGrow: 1 }} />
-          <Tooltip title="Contacts">
-            <IconButton sx={{ ml: 1 }}>
-              <UsersIcon fontSize="small" />
-            </IconButton>
-          </Tooltip>
-          <Avatar
-            sx={{
-              height: 40,
-              width: 40,
-              ml: 1,
-            }}
-            // src={user.photo_url}
-          >
-            {getInitials(user?.full_name)}
-          </Avatar>
+          <NextLink href="/people">
+            <Tooltip title="People">
+              <IconButton sx={{ ml: 1 }}>
+                <UsersIcon fontSize="small" />
+              </IconButton>
+            </Tooltip>
+          </NextLink>
+          <NextLink href="/account">
+            <Tooltip title="My Account">
+              <IconButton sx={{ ml: 1 }}>
+                <Avatar
+                  sx={{
+                    height: 40,
+                    width: 40,
+                    ml: 1,
+                  }}
+                  // src={user.photo_url}
+                >
+                  {getInitials(user?.full_name)}
+                </Avatar>
+              </IconButton>
+            </Tooltip>
+          </NextLink>
         </Toolbar>
       </DashboardNavbarRoot>
     </>

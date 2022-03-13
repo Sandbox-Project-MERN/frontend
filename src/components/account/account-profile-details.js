@@ -59,7 +59,6 @@ const AccountProfileDetails = () => {
       autoComplete="false"
       autoCorrect="false"
     >
-      {console.log(isLoading, "here")}
       <Card>
         <CardHeader
           subheader="use your business details, it will allow you to automate your invoices"
