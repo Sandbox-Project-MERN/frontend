@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
-import styled from "@emotion/styled";
+
+import { useAuth } from "../../lib/auth";
+import { getInitials } from "../../utils";
 
 import {
   AppBar,
@@ -12,17 +14,16 @@ import {
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
-import { UserCircle as UserCircleIcon } from "../../icons/user-circle";
+import styled from "@emotion/styled";
 import { Users as UsersIcon } from "../../icons/users";
-import { getInitials } from "../../utils/get-initials";
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
   boxShadow: theme.shadows[3],
 }));
 
-const DashboardNavbar = (props) => {
-  const { onSidebarOpen, user } = props;
+const DashboardNavbar = ({ onSidebarOpen }) => {
+  const { user } = useAuth();
 
   return (
     <>
@@ -69,8 +70,7 @@ const DashboardNavbar = (props) => {
             }}
             // src={user.photo_url}
           >
-            {/* {getInitials(`${user.first_name} ${user.last_name}`)} */}
-            {"EB"}
+            {getInitials(user?.full_name)}
           </Avatar>
         </Toolbar>
       </DashboardNavbarRoot>
