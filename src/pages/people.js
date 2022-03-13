@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { Box, Container } from "@mui/material";
-import { DashboardLayout } from "../components/dashboard-layout";
+import { DashboardLayout } from "../components/dashboard/dashboard-layout";
 
 const People = () => (
   <>

@@ -9,3 +9,18 @@ export const storage = {
   setToken: (token) => localStorage.setItem("token", token),
   clearToken: () => localStorage.removeItem("token"),
 };
+
+export const getInitials = (name = "") =>
+  name
+    .replace(/\s+/, " ")
+    .split(" ")
+    .slice(0, 2)
+    .map((v) => v && v[0].toUpperCase())
+    .join("");
+
+export const capitalizeName = (name = "") =>
+  name
+    .split(" ")
+    .map((v) => v.toLowerCase())
+    .map((v) => v[0].toUpperCase() + v.slice(1))
+    .join(" ");

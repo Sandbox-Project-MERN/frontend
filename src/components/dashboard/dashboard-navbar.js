@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useAuth } from "../../lib/auth";
 import styled from "@emotion/styled";
 
 import {
@@ -21,11 +22,12 @@ const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   boxShadow: theme.shadows[3],
 }));
 
-const DashboardNavbar = (props) => {
-  const { onSidebarOpen, user } = props;
+const DashboardNavbar = ({ onSidebarOpen }) => {
+  const { user } = useAuth();
 
   return (
     <>
+      {console.log(user)}
       <DashboardNavbarRoot
         sx={{
           left: {
@@ -69,8 +71,7 @@ const DashboardNavbar = (props) => {
             }}
             // src={user.photo_url}
           >
-            {/* {getInitials(`${user.first_name} ${user.last_name}`)} */}
-            {"EB"}
+            {getInitials(user?.full_name)}
           </Avatar>
         </Toolbar>
       </DashboardNavbarRoot>
