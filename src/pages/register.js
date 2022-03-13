@@ -54,10 +54,17 @@ const Register = () => {
       password: Yup.string().max(255).required("can't be empty"),
       policy: Yup.boolean().oneOf([true], "this field must be checked"),
     }),
-    onSubmit: ({ email, full_name, description }, { setErrors }) => {
-      register({ email, full_name, description }).then((res) => {
-        console.log(res);
-      });
+    onSubmit: ({ email, full_name, description, password }, { setErrors }) => {
+      register({ email, full_name, description, password })
+        .then(() => router.push("/"))
+        .catch((err) => {
+          const errMessage = err.response.data.message;
+
+          if (errMessage.includes("password"))
+            setErrors({ password: errMessage });
+
+          if (errMessage.includes("email")) setErrors({ email: errMessage });
+        });
     },
   });
 
@@ -186,6 +193,7 @@ const Register = () => {
               <LoadingButton
                 color="primary"
                 loading={false}
+                disabled={!formik.isValid}
                 fullWidth
                 size="large"
                 type="submit"

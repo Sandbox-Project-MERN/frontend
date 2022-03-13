@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
+
 import { useAuth } from "../../lib/auth";
-import styled from "@emotion/styled";
+import { getInitials } from "../../utils";
 
 import {
   AppBar,
@@ -13,9 +14,8 @@ import {
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
-import { UserCircle as UserCircleIcon } from "../../icons/user-circle";
+import styled from "@emotion/styled";
 import { Users as UsersIcon } from "../../icons/users";
-import { getInitials } from "../../utils/get-initials";
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -27,7 +27,6 @@ const DashboardNavbar = ({ onSidebarOpen }) => {
 
   return (
     <>
-      {console.log(user)}
       <DashboardNavbarRoot
         sx={{
           left: {

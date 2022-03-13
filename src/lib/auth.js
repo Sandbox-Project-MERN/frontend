@@ -9,12 +9,9 @@ export async function handleUserResponse(data) {
 }
 
 async function loadUser() {
-  //   let user = null;
-  //   if (storage.getToken()) {
-  //     const data = await getUserProfile("622d7301b4b502e33d843ad4");
-  //     user = data;
-  //   }
-  //   return user;
+  const { user_id } = decodeJWT(storage.getToken());
+
+  return await getUserProfile(user_id);
 }
 
 async function loginFn(data) {
@@ -26,12 +23,15 @@ async function loginFn(data) {
 }
 
 async function registerFn(data) {
-  const response = await access(data, "register");
-  return response;
+  const { authToken } = await access(data, "register");
+
+  const { user_id } = decodeJWT(authToken);
+
+  return await getUserProfile(user_id);
 }
 
 async function logoutFn() {
-  storage.clearToken();
+  // storage.clearToken();
 }
 
 const authConfig = {
