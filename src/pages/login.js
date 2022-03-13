@@ -4,8 +4,8 @@ import NextLink from "next/link";
 import * as Yup from "yup";
 
 import { useFormik } from "formik";
-import { useQuery } from "react-query";
-import { access } from "../fetch-functions";
+import { useAuth } from "../lib/auth";
+import { useState } from "react";
 
 import LoadingButton from "@mui/lab/LoadingButton";
 import {
@@ -16,15 +16,25 @@ import {
   Link,
   TextField,
   Typography,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
+
 import { Facebook as FacebookIcon } from "../icons/facebook";
 import { Google as GoogleIcon } from "../icons/google";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { Router } from "next/router";
 
 const SignIn = () => {
+  const [pwVisible, setPwVisibility] = useState(false);
+
+  const { login, isLoggingIn } = useAuth();
+
   const formik = useFormik({
     initialValues: {
       email: "guest@gmail.com",
-      password: "guestPassword!!221",
+      password: "guestPassword!!11$",
     },
     validationSchema: Yup.object({
       email: Yup.string()
@@ -33,8 +43,17 @@ const SignIn = () => {
         .required("Email is required"),
       password: Yup.string().max(255).required("Password is required"),
     }),
-    onSubmit: (formValues, { setErrors }) => {
-      console.log(formValues);
+    onSubmit: (formData, { setErrors }) => {
+      login(formData)
+        .then((res) => {
+          Router.push("/");
+        })
+        .catch((err) => {
+          if (err.response.data.message.includes("email"))
+            setErrors({ email: err.response.data.message });
+          if (err.response.data.message.includes("password"))
+            setErrors({ password: err.response.data.message });
+        });
     },
   });
 
@@ -120,14 +139,27 @@ const SignIn = () => {
               name="password"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              type="password"
+              type={pwVisible ? "text" : "password"}
               value={formik.values.password}
               variant="outlined"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => setPwVisibility(!pwVisible)}
+                      edge="end"
+                    >
+                      {pwVisible ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
             <Box sx={{ py: 2 }}>
               <LoadingButton
                 color="primary"
-                loading={false}
+                loading={isLoggingIn}
                 disabled={!formik.isValid}
                 fullWidth
                 size="large"

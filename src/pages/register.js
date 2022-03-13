@@ -1,6 +1,7 @@
 import Head from "next/head";
 import NextLink from "next/link";
 
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
 
@@ -14,16 +15,25 @@ import {
   Link,
   TextField,
   Typography,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
+
 import LoadingButton from "@mui/lab/LoadingButton";
 
-const Register = ({ dispatch, isLoading }) => {
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+
+const Register = () => {
   const router = useRouter();
+
+  const [pwVisible, setPwVisibility] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       email: "",
-      first_name: "",
-      last_name: "",
+      full_name: "",
+      description: "",
       password: "",
       policy: false,
     },
@@ -32,8 +42,13 @@ const Register = ({ dispatch, isLoading }) => {
         .email("must be a valid email")
         .max(255)
         .required("email is required"),
-      first_name: Yup.string().max(255).required("can't be empty"),
-      last_name: Yup.string().max(255).required("can't be empty"),
+      full_name: Yup.string()
+        .max(255)
+        .required("can't be empty")
+        .matches(/^[\p{L} ,.'-]+$/u, "invalid name"),
+      description: Yup.string()
+        .max(150, "only 150 characters long please...")
+        .required("don't be shy 😆"),
       password: Yup.string().max(255).required("can't be empty"),
       policy: Yup.boolean().oneOf([true], "this field must be checked"),
     }),
@@ -69,30 +84,16 @@ const Register = ({ dispatch, isLoading }) => {
             </Box>
             <TextField
               error={Boolean(
-                formik.touched.first_name && formik.errors.first_name
+                formik.touched.full_name && formik.errors.full_name
               )}
               fullWidth
-              helperText={formik.touched.first_name && formik.errors.first_name}
-              label="First Name"
+              helperText={formik.touched.full_name && formik.errors.full_name}
+              label="Name"
               margin="normal"
-              name="first_name"
+              name="full_name"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              value={formik.values.first_name}
-              variant="outlined"
-            />
-            <TextField
-              error={Boolean(
-                formik.touched.last_name && formik.errors.last_name
-              )}
-              fullWidth
-              helperText={formik.touched.last_name && formik.errors.last_name}
-              label="Last Name"
-              margin="normal"
-              name="last_name"
-              onBlur={formik.handleBlur}
-              onChange={formik.handleChange}
-              value={formik.values.last_name}
+              value={formik.values.full_name}
               variant="outlined"
             />
             <TextField
@@ -117,8 +118,41 @@ const Register = ({ dispatch, isLoading }) => {
               name="password"
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
-              type="password"
+              type={pwVisible ? "text" : "password"}
               value={formik.values.password}
+              variant="outlined"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => setPwVisibility(!pwVisible)}
+                      edge="end"
+                    >
+                      {pwVisible ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+
+            <TextField
+              error={Boolean(
+                formik.touched.description && formik.errors.description
+              )}
+              fullWidth
+              helperText={
+                formik.touched.description && formik.errors.description
+              }
+              label="Brief Description"
+              margin="normal"
+              name="description"
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              type="text"
+              multiline
+              maxRows={2}
+              value={formik.values.description}
               variant="outlined"
             />
             <Box
@@ -148,7 +182,7 @@ const Register = ({ dispatch, isLoading }) => {
             <Box sx={{ py: 2 }}>
               <LoadingButton
                 color="primary"
-                loading={isLoading}
+                loading={false}
                 fullWidth
                 size="large"
                 type="submit"
