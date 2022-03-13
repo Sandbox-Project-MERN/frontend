@@ -3,8 +3,9 @@ import NextLink from "next/link";
 
 import * as Yup from "yup";
 
-import { useFormik } from "formik";
 import { useAuth } from "../lib/auth";
+import { useFormik } from "formik";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -24,12 +25,12 @@ import { Facebook as FacebookIcon } from "../icons/facebook";
 import { Google as GoogleIcon } from "../icons/google";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { Router } from "next/router";
 
 const SignIn = () => {
   const [pwVisible, setPwVisibility] = useState(false);
-
   const { login, isLoggingIn } = useAuth();
+
+  const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
@@ -45,10 +46,9 @@ const SignIn = () => {
     }),
     onSubmit: (formData, { setErrors }) => {
       login(formData)
-        .then((res) => {
-          Router.push("/");
-        })
+        .then(() => router.push("/"))
         .catch((err) => {
+          console.log(err);
           if (err.response.data.message.includes("email"))
             setErrors({ email: err.response.data.message });
           if (err.response.data.message.includes("password"))

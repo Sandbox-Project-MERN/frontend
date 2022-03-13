@@ -1,7 +1,6 @@
 import { initReactQueryAuth } from "react-query-auth";
 import { access, getUserProfile } from "../query-functions";
-import { decodeJWT } from "../utils";
-import storage from "../utils/localStorage";
+import { storage, decodeJWT } from "../utils";
 
 export async function handleUserResponse(data) {
   const { jwt, user } = data;
@@ -21,7 +20,9 @@ async function loadUser() {
 async function loginFn(data) {
   const { authToken } = await access(data, "login");
 
-  return decodeJWT(authToken);
+  const { user_id } = decodeJWT(authToken);
+
+  return await getUserProfile(user_id);
 }
 
 async function registerFn(data) {
