@@ -1,4 +1,4 @@
-import axiosWithAuth from "../utils/axiosWithAuth";
+import { axiosWithAuth } from "../utils";
 
 // auth functions
 export const access = async (userInfo, type) => {

@@ -1,7 +1,19 @@
 import jwt_decode from "jwt-decode";
+import axios from "axios";
 
 export const decodeJWT = (jwt) => {
   return jwt_decode(jwt);
+};
+
+export const axiosWithAuth = () => {
+  const token = storage.getToken();
+
+  return axios.create({
+    headers: {
+      authorization: token ? token : "",
+    },
+    baseURL: "http://localhost:8000/api",
+  });
 };
 
 export const storage = {
@@ -14,7 +26,6 @@ export const getInitials = (name = "") =>
   name
     .replace(/\s+/, " ")
     .split(" ")
-    .slice(0, 2)
     .map((v) => v && v[0].toUpperCase())
     .join("");
 
