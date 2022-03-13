@@ -4,6 +4,7 @@ import NextLink from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { useFormik } from "formik";
+import { useAuth } from "../lib/auth";
 
 import * as Yup from "yup";
 
@@ -25,6 +26,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const Register = () => {
+  const { register } = useAuth();
   const router = useRouter();
 
   const [pwVisible, setPwVisibility] = useState(false);
@@ -52,9 +54,10 @@ const Register = () => {
       password: Yup.string().max(255).required("can't be empty"),
       policy: Yup.boolean().oneOf([true], "this field must be checked"),
     }),
-    onSubmit: (formValues, { setErrors }) => {
-      // dispatch(access(formValues, () => router.push("/"), "register", setErrors));
-      console.log(formValues);
+    onSubmit: ({ email, full_name, description }, { setErrors }) => {
+      register({ email, full_name, description }).then((res) => {
+        console.log(res);
+      });
     },
   });
 
