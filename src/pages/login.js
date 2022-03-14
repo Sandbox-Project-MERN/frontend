@@ -78,11 +78,11 @@ const SignIn = () => {
               <Typography color="textPrimary" variant="h4">
                 Sign in
               </Typography>
-              <Typography color="textSecondary" gutterBottom variant="body2">
+              {/* <Typography color="textSecondary" gutterBottom variant="body2">
                 Sign in with Oauth
-              </Typography>
+              </Typography> */}
             </Box>
-            <Grid container spacing={3}>
+            {/* <Grid container spacing={3}>
               <Grid item xs={12} md={6}>
                 <Button
                   color="info"
@@ -107,8 +107,8 @@ const SignIn = () => {
                   Sign In with Google
                 </Button>
               </Grid>
-            </Grid>
-            <Box
+            </Grid> */}
+            {/* <Box
               sx={{
                 pb: 1,
                 pt: 3,
@@ -117,7 +117,7 @@ const SignIn = () => {
               <Typography align="center" color="textSecondary" variant="body1">
                 or sign in with your email address
               </Typography>
-            </Box>
+            </Box> */}
             <TextField
               error={Boolean(formik.touched.email && formik.errors.email)}
               fullWidth
