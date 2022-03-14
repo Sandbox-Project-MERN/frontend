@@ -67,7 +67,7 @@ const DashboardNavbar = ({ onSidebarOpen }) => {
               </IconButton>
             </Tooltip>
           </NextLink>
-          <NextLink href="/account">
+          <NextLink href="/">
             <Tooltip title="My Account">
               <IconButton sx={{ ml: 1 }}>
                 <Avatar
