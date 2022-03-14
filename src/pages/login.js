@@ -69,6 +69,8 @@ const SignIn = () => {
           display: "flex",
           flexGrow: 1,
           minHeight: "100%",
+          py: 5,
+          px: 3,
         }}
       >
         <Container maxWidth="sm">
