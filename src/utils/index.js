@@ -1,5 +1,6 @@
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import { BACKEND_URL } from "../config";
 
 export const decodeJWT = (jwt) => {
   return jwt_decode(jwt);
@@ -12,7 +13,7 @@ export const axiosWithAuth = () => {
     headers: {
       authorization: token ? token : "",
     },
-    baseURL: "http://localhost:8000/api",
+    baseURL: BACKEND_URL,
   });
 };
 

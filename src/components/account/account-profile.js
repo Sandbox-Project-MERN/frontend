@@ -1,75 +1,49 @@
 import { useAuth } from "../../lib/auth";
-import { useState } from "react";
-import {
-  Avatar,
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Divider,
-  Input,
-  Typography,
-} from "@mui/material";
+import { useMutation } from "react-query";
+import { updateUserImage } from "../../query-functions";
 
-import { getInitials, capitalizeName } from "../../utils";
+import { Card, CardActions, Divider, Input } from "@mui/material";
+
+import { LoadingButton } from "@mui/lab";
+import UserCardContent from "../users/user-card";
 
 const AccountProfile = () => {
-  const { user } = useAuth();
+  const { user, refetchUser } = useAuth();
 
-  const [selectedFile, setSelectedFile] = useState();
+  const { mutate, isLoading } = useMutation(
+    (selectedFile) => updateUserImage(user._id, selectedFile),
+    {
+      onSuccess: () => refetchUser(),
+      onError: (err) => {
+        console.log(err.response, "ERROR");
+      },
+    }
+  );
 
   return (
     <Card>
-      <CardContent>
-        <Box
-          sx={{
-            alignItems: "center",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <Avatar
-            src={user.photo_url}
-            sx={{
-              height: 75,
-              mb: 2,
-              width: 75,
-            }}
-          >
-            {getInitials(user.full_name)}
-          </Avatar>
-          <Typography color="textPrimary" gutterBottom variant="h5">
-            {capitalizeName(user.full_name)}
-          </Typography>
-          <Typography
-            color="textSecondary"
-            variant="body2"
-            textAlign={"center"}
-          >
-            {user.description}
-          </Typography>
-        </Box>
-      </CardContent>
+      <UserCardContent user={user} />
+
       <Divider />
       <CardActions>
-        <Button
+        <LoadingButton
           color="primary"
           fullWidth
           variant="text"
           component="label"
           aria-label="upload picture"
+          loading={isLoading}
         >
           Upload picture
           <Input
             name="file"
-            onChange={(e) => setSelectedFile(e.target.files[0])}
+            onChange={(e) => mutate(e.target.files[0])}
             type="file"
             id="contained-button-file"
             sx={{ display: "none" }}
             inputProps={{ hidden: true, accept: "image/png, image/jpeg" }}
           />
-        </Button>
+        </LoadingButton>
       </CardActions>
     </Card>
   );

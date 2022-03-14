@@ -32,7 +32,7 @@ const App = (props) => {
           <QueryClientProvider client={queryClient}>
             <AuthProvider>
               {getLayout(<Component {...pageProps} />)}
-              {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+              <ReactQueryDevtools initialIsOpen={false} />
             </AuthProvider>
           </QueryClientProvider>
         </ThemeProvider>

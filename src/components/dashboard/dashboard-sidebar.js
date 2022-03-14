@@ -11,23 +11,17 @@ import { Logo } from "../logo";
 import { User as UserIcon } from "../../icons/user";
 import { NavItem } from "../nav-item";
 import { Users as UsersIcon } from "../../icons/users";
-import { ChartBar as ChartBarIcon } from "../../icons/chart-bar";
 
 const items = [
   {
     href: "/",
-    icon: <ChartBarIcon fontSize="small" />,
-    title: "Home",
+    icon: <UserIcon fontSize="small" />,
+    title: "Account",
   },
   {
     href: "/people",
     icon: <UsersIcon fontSize="small" />,
     title: "People",
-  },
-  {
-    href: "/account",
-    icon: <UserIcon fontSize="small" />,
-    title: "Account",
   },
 ];
 

@@ -19,6 +19,7 @@ import styled from "@emotion/styled";
 
 import { Users as UsersIcon } from "../../icons/users";
 import { User as UserIcon } from "../../icons/user";
+import { BACKEND_URL } from "../../config";
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -76,7 +77,7 @@ const DashboardNavbar = ({ onSidebarOpen }) => {
                     width: 40,
                     ml: 1,
                   }}
-                  // src={user.photo_url}
+                  src={`${BACKEND_URL}/image/${user.photo_url}`}
                 >
                   {getInitials(user?.full_name)}
                 </Avatar>
