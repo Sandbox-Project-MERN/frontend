@@ -18,7 +18,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import styled from "@emotion/styled";
 
 import { Users as UsersIcon } from "../../icons/users";
-import { User as UserIcon } from "../../icons/user";
 import { BACKEND_URL } from "../../config";
 
 const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({

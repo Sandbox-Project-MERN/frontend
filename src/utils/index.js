@@ -18,9 +18,16 @@ export const axiosWithAuth = () => {
 };
 
 export const storage = {
-  getToken: () => localStorage.getItem("token"),
-  setToken: (token) => localStorage.setItem("token", `bearer ${token}`),
-  clearToken: () => localStorage.removeItem("token"),
+  getToken: () => {
+    if (typeof window !== "undefined") return localStorage.getItem("token");
+  },
+  setToken: (token) => {
+    if (typeof window !== "undefined")
+      localStorage.setItem("token", `bearer ${token}`);
+  },
+  clearToken: () => {
+    if (typeof window !== "undefined") localStorage.removeItem("token");
+  },
 };
 
 export const getInitials = (name = "") =>
