@@ -6,6 +6,8 @@ import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import { useAuth } from "../lib/auth";
 
+import Router from "next/router";
+
 import * as Yup from "yup";
 
 import {
@@ -27,7 +29,6 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const Register = () => {
   const { register, isRegistering } = useAuth();
-  const router = useRouter();
 
   const [tosOpen, setTosOpen] = useState(false);
   const [pwVisible, setPwVisibility] = useState(false);
@@ -57,7 +58,10 @@ const Register = () => {
     }),
     onSubmit: ({ email, full_name, description, password }, { setErrors }) => {
       register({ email, full_name, description, password })
-        .then(() => router.push("/"))
+        .then((res) => {
+          console.log(res, "here");
+          Router.push("/");
+        })
         .catch((err) => {
           const errMessage = err.response.data.message;
 
@@ -87,12 +91,9 @@ const Register = () => {
       >
         <Container maxWidth="sm">
           <form onSubmit={formik.handleSubmit}>
-            <Box sx={{ my: 3 }}>
+            <Box>
               <Typography color="textPrimary" variant="h4">
                 Create a new account 🥳
-              </Typography>
-              <Typography color="textSecondary" gutterBottom variant="body2">
-                Use your email to create a new account
               </Typography>
             </Box>
             <TextField

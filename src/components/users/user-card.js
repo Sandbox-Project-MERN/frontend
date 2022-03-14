@@ -10,13 +10,12 @@ const UserCardContent = ({ user }) => {
           alignItems: "center",
           display: "flex",
           flexDirection: "column",
+          textAlign: "center",
         }}
       >
         <Avatar
           src={`${BACKEND_URL}/image/${user?.photo_url}`}
-          height={75}
-          width={75}
-          sx={{ mb: 2 }}
+          sx={{ height: "70px", width: "70px", mb: 2 }}
         >
           {getInitials(user.full_name)}
         </Avatar>

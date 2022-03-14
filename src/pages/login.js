@@ -48,7 +48,7 @@ const SignIn = () => {
       login(formData)
         .then(() => router.push("/"))
         .catch((err) => {
-          console.log(err);
+          console.log(err.response);
           if (err.response.data.message.includes("email"))
             setErrors({ email: err.response.data.message });
           if (err.response.data.message.includes("password"))

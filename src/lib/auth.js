@@ -4,7 +4,6 @@ import { storage, decodeJWT } from "../utils";
 
 async function loadUser() {
   const { user_id } = decodeJWT(storage.getToken());
-
   return await getUserProfile(user_id);
 }
 
@@ -19,6 +18,8 @@ async function loginFn(data) {
 
 async function registerFn(data) {
   const { authToken } = await access(data, "register");
+
+  storage.setToken(authToken);
 
   const { user_id } = decodeJWT(authToken);
 
