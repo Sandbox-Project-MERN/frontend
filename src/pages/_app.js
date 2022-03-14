@@ -10,7 +10,6 @@ import { theme } from "../theme";
 const clientSideEmotionCache = createEmotionCache();
 
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
 import { AuthProvider } from "../lib/auth";
 
 const queryClient = new QueryClient();
@@ -32,7 +31,6 @@ const App = (props) => {
           <QueryClientProvider client={queryClient}>
             <AuthProvider>
               {getLayout(<Component {...pageProps} />)}
-              <ReactQueryDevtools initialIsOpen={false} />
             </AuthProvider>
           </QueryClientProvider>
         </ThemeProvider>

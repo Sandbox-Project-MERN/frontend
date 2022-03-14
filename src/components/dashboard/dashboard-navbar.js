@@ -77,7 +77,7 @@ const DashboardNavbar = ({ onSidebarOpen }) => {
                     width: 40,
                     ml: 1,
                   }}
-                  src={`${BACKEND_URL}/image/${user.photo_url}`}
+                  src={`${BACKEND_URL}/image/${user?.photo_url}`}
                 >
                   {getInitials(user?.full_name)}
                 </Avatar>

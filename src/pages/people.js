@@ -27,13 +27,15 @@ const People = () => {
           py: 8,
         }}
       >
-        {(isLoading ? Array.from(new Array(3)) : data ? data : []).map(
-          (user, index) => {
-            console.log(user);
+        {status === "success" &&
+          data.map((user, index) => {
             if (user) return <UserCardContent user={user} key={index} />;
             else return <div>Loading</div>;
-          }
-        )}
+          })}
+
+        {status === "error" && <div>Error...</div>}
+
+        {isLoading && <div>Loading...</div>}
       </Grid>
     </>
   );
