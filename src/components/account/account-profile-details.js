@@ -60,10 +60,7 @@ const AccountProfileDetails = () => {
       autoCorrect="false"
     >
       <Card>
-        <CardHeader
-          subheader="use your business details, it will allow you to automate your invoices"
-          title="Profile"
-        />
+        <CardHeader title="Profile" />
         <Divider />
         <CardContent>
           <Grid container spacing={3}>
