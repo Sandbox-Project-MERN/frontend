@@ -23,14 +23,15 @@ const NotFound = () => (
             alignItems: "center",
             display: "flex",
             flexDirection: "column",
+            py: 5,
+            px: 3,
           }}
         >
           <Typography align="center" color="textPrimary" variant="h1">
-            404: The page you are looking for isn’t here
+            404
           </Typography>
           <Typography align="center" color="textPrimary" variant="subtitle2">
-            You either tried some shady route or you came here by mistake.
-            Whichever it is, try using the navigation
+            You either tried some shady route or you came here by mistake
           </Typography>
           <Box sx={{ textAlign: "center" }}>
             <img
@@ -50,8 +51,9 @@ const NotFound = () => (
               startIcon={<ArrowBackIcon fontSize="small" />}
               sx={{ mt: 3 }}
               variant="contained"
+              fullWidth
             >
-              Go back to dashboard
+              Dashboard
             </Button>
           </NextLink>
         </Box>

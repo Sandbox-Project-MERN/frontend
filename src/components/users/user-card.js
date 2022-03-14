@@ -15,7 +15,7 @@ const UserCardContent = ({ user }) => {
       >
         <Avatar
           src={`${BACKEND_URL}/image/${user?.photo_url}`}
-          sx={{ height: "70px", width: "70px", mb: 2 }}
+          sx={{ height: "75px", width: "75px", mb: 2 }}
         >
           {getInitials(user.full_name)}
         </Avatar>

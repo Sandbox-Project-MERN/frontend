@@ -58,8 +58,7 @@ const Register = () => {
     }),
     onSubmit: ({ email, full_name, description, password }, { setErrors }) => {
       register({ email, full_name, description, password })
-        .then((res) => {
-          console.log(res, "here");
+        .then(() => {
           Router.push("/");
         })
         .catch((err) => {

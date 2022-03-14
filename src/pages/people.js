@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import { useQuery } from "react-query";
 
-import { Box, Paper, Skeleton, Grid } from "@mui/material";
+import { Box, Paper, Card, Skeleton, Grid } from "@mui/material";
 import { DashboardLayout } from "../components/dashboard/dashboard-layout";
 import { getUserProfiles } from "../query-functions";
 import UserCardContent from "../components/users/user-card";
@@ -24,14 +24,18 @@ const People = () => {
           justifyContent: "center",
           gap: 3,
           overflow: "auto",
-          px: 8,
-          py: 8,
+          px: 3,
+          pt: 3,
+          pb: 8,
         }}
       >
         {status === "success" &&
           data.map((user, index) => {
-            if (user) return <UserCardContent user={user} key={index} />;
-            else return <div>Loading</div>;
+            return (
+              <Card sx={{ backgroundColor: "gray.100", w: "auto" }}>
+                <UserCardContent user={user} key={index} />
+              </Card>
+            );
           })}
 
         {status === "error" && <div>Error...</div>}
