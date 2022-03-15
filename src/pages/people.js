@@ -22,6 +22,7 @@ const People = () => {
         component="main"
         sx={{
           justifyContent: "center",
+          alignItems: "center",
           gap: 3,
           overflow: "auto",
           px: 3,
