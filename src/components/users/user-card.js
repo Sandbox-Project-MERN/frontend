@@ -11,6 +11,7 @@ const UserCardContent = ({ user }) => {
           display: "flex",
           flexDirection: "column",
           textAlign: "center",
+          maxWidth: { sm: "300px", xs: "230px" },
         }}
       >
         <Avatar
