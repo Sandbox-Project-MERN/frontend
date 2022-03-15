@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { useAuth } from "../../lib/auth";
-import { useQuery, useMutation } from "react-query";
+import { useMutation } from "react-query";
 
 import { updateUserProfile } from "../../query-functions";
 

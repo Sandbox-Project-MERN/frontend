@@ -11,7 +11,6 @@ const UserCardContent = ({ user }) => {
           display: "flex",
           flexDirection: "column",
           textAlign: "center",
-          maxWidth: { sm: "300px", xs: "230px" },
         }}
       >
         <Avatar
@@ -23,7 +22,12 @@ const UserCardContent = ({ user }) => {
         <Typography color="textPrimary" gutterBottom variant="h5">
           {capitalizeName(user.full_name)}
         </Typography>
-        <Typography color="textSecondary" variant="body2" textAlign={"center"}>
+        <Typography
+          color="textSecondary"
+          variant="body2"
+          textAlign={"center"}
+          sx={{ maxWidth: { sm: "300px", xs: "230px" } }}
+        >
           {user.description}
         </Typography>
       </Box>
