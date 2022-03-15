@@ -2,8 +2,6 @@ import Head from "next/head";
 
 import { Box, Container, Grid, Typography } from "@mui/material";
 
-import { DashboardLayout } from "../components/dashboard/dashboard-layout";
-
 import AccountProfile from "../components/account/account-profile";
 import AccountProfileDetails from "../components/account/account-profile-details";
 import withAuth from "../components/with-auth";

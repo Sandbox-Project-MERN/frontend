@@ -18,7 +18,6 @@ async function loginFn(data) {
 
 async function registerFn(data) {
   const { authToken } = await access(data, "register");
-
   storage.setToken(authToken);
 
   const { user_id } = decodeJWT(authToken);
@@ -27,7 +26,7 @@ async function registerFn(data) {
 }
 
 async function logoutFn() {
-  // storage.clearToken();
+  storage.clearToken();
 }
 
 const authConfig = {
